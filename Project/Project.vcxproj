@@ -78,7 +78,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\OpenGL\include;C:\glm;$(IncludePath)</IncludePath>
+    <IncludePath>C:\OpenGL\include;C:\OpenGL\resources;C:\glm;$(IncludePath)</IncludePath>
     <LibraryPath>C:\OpenGL\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -144,6 +144,10 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\..\..\..\..\OpenGL\glad\src\glad.c" />
     <ClCompile Include="test1.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="6.1.coordinate_systems.fs" />
+    <None Include="6.1.coordinate_systems.vs" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

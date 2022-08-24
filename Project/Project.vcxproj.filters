@@ -22,4 +22,12 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="6.1.coordinate_systems.vs">
+      <Filter>소스 파일</Filter>
+    </None>
+    <None Include="6.1.coordinate_systems.fs">
+      <Filter>소스 파일</Filter>
+    </None>
+  </ItemGroup>
 </Project>
