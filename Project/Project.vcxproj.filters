@@ -21,12 +21,24 @@
     <ClCompile Include="test1.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="test2.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="stb_image.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="6.1.coordinate_systems.vs">
       <Filter>소스 파일</Filter>
     </None>
     <None Include="6.1.coordinate_systems.fs">
+      <Filter>소스 파일</Filter>
+    </None>
+    <None Include="test2.fs">
+      <Filter>소스 파일</Filter>
+    </None>
+    <None Include="test2.vs">
       <Filter>소스 파일</Filter>
     </None>
   </ItemGroup>
