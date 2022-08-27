@@ -78,7 +78,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\OpenGL\include;C:\OpenGL\resources;C:\glm;$(IncludePath)</IncludePath>
+    <IncludePath>C:\OpenGL\glm;C:\OpenGL\include;C:\OpenGL\resources;$(IncludePath)</IncludePath>
     <LibraryPath>C:\OpenGL\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -143,17 +143,24 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\..\..\..\OpenGL\glad\src\glad.c" />
-    <ClCompile Include="stb_image.cpp" />
     <ClCompile Include="test1.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="test2.cpp" />
+    <ClCompile Include="test2.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="test3.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="test4.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="6.1.coordinate_systems.fs" />
     <None Include="6.1.coordinate_systems.vs" />
     <None Include="test2.fs" />
     <None Include="test2.vs" />
+    <None Include="test4.fs" />
+    <None Include="test4.vs" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -24,7 +24,10 @@
     <ClCompile Include="test2.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="stb_image.cpp">
+    <ClCompile Include="test3.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="test4.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -39,6 +42,12 @@
       <Filter>소스 파일</Filter>
     </None>
     <None Include="test2.vs">
+      <Filter>소스 파일</Filter>
+    </None>
+    <None Include="test4.vs">
+      <Filter>소스 파일</Filter>
+    </None>
+    <None Include="test4.fs">
       <Filter>소스 파일</Filter>
     </None>
   </ItemGroup>

@@ -4,11 +4,11 @@
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-#include <stb_image.h> // 싱글 헤더 이미지로드 라이브러리
+#include <STB/stb_image.h> // 싱글 헤더 이미지로드 라이브러리
 
-#include <glm.hpp> // GLM 기본 헤더, 여러 자료형 포함
-#include <gtc/matrix_transform.hpp>// 행렬 변환에 사용되는 함수 모음
-#include <gtc/type_ptr.hpp>// GLM 자료형들의 메모리 관련 기능
+#include <glm/glm.hpp> // GLM 기본 헤더, 여러 자료형 포함
+#include <glm/gtc/matrix_transform.hpp>// 행렬 변환에 사용되는 함수 모음
+#include <glm/gtc/type_ptr.hpp>// GLM 자료형들의 메모리 관련 기능
 
 #include <SHADERS/shader.h>
 

@@ -16,8 +16,9 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void processInput(GLFWwindow* window);
 
 // settings
-const unsigned int SCR_WIDTH = 800;
-const unsigned int SCR_HEIGHT = 600;
+const unsigned int SCR_WIDTH = 1600;
+const unsigned int SCR_HEIGHT = 900;
+
 
 int main()
 {
@@ -133,11 +134,11 @@ int main()
     glEnableVertexAttribArray(1);
 
 
-    GLuint texture1[2];
+    GLuint texture[2];
 
     // texture 1
-    glGenTextures(2, texture1);
-    glBindTexture(GL_TEXTURE_2D, texture1[0]);
+    glGenTextures(2, texture);
+    glBindTexture(GL_TEXTURE_2D, texture[0]);
 
     // 텍스처 랩핑
     // 파라미터 1 : 텍스처 타겟 지정
@@ -153,7 +154,7 @@ int main()
 
     // load image, create texture and generate mipmaps
     int width, height, nrChannels;
-    stbi_set_flip_vertically_on_load(true); 
+    stbi_set_flip_vertically_on_load(true);
 
     // 이미지 로드
     // 파라미터 1 : 이미지 파일 경로 받기
@@ -178,35 +179,8 @@ int main()
     }
     stbi_image_free(data);
 
-    
-    // texture 2
-    GLuint texture2;
-    //glGenTextures(1, texture1[1]);
-    glBindTexture(GL_TEXTURE_2D, texture1[1]);
-
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-    unsigned char* data2 = stbi_load("textures/brick2.png", &width, &height, &nrChannels, 0);
-    if (data2)
-    {
-        // note that the awesomeface.png has transparency and thus an alpha channel, so make sure to tell OpenGL the data type is of GL_RGBA
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data2);
-        glGenerateMipmap(GL_TEXTURE_2D);
-    }
-    else
-    {
-        std::cout << "Failed to load texture" << std::endl;
-    }
-    
-    stbi_image_free(data2);
-    
     ourShader.use();
-    ourShader.setInt("texture1", 0);
-    ourShader.setInt("texture2", 1);
+    ourShader.setInt("texture", 0);
 
 
     // 메인 루프(render loop) : 우리가 그만하라고 할때까지 계속 실행
@@ -224,9 +198,7 @@ int main()
 
         // bind textures on corresponding texture units
         glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, texture1[0]);
-        glActiveTexture(GL_TEXTURE1);
-        glBindTexture(GL_TEXTURE_2D, texture1[1]);
+        glBindTexture(GL_TEXTURE_2D, texture[0]);
 
         // activate shader
         ourShader.use();
@@ -237,7 +209,7 @@ int main()
         glm::mat4 projection = glm::mat4(1.0f);
         // model 행렬 : vertex들을 world space로 변환하기 위한 것들로 이루어져 있음
         // vertex * model -> vertex를 world좌표로 변환 가능
-        model = glm::rotate(model, glm::radians(50.0f), glm::vec3(0.5f, 1.0f, 0.0f));// 이부분 수정, 회전 방지 입력
+        model = glm::rotate(model, glm::radians(45.0f), glm::vec3(0.5f, 1.0f, 0.2f));// 이부분 수정, 회전 방지 입력, vec3 마지막 파라미터 0.0->0.2
         // 우리가 움직이고 싶은 방향과 반대로 scene 이동
         view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
         // 파라미터 1 : fov 값 지정(view space가 얼마나 큰지, 보통 현실적 시점을 위해 45도로 설정)
