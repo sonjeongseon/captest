@@ -152,7 +152,10 @@
     <ClCompile Include="test3.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="test4.cpp" />
+    <ClCompile Include="test4.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="test5.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="6.1.coordinate_systems.fs" />
@@ -161,6 +164,8 @@
     <None Include="test2.vs" />
     <None Include="test4.fs" />
     <None Include="test4.vs" />
+    <None Include="test5.fs" />
+    <None Include="test5.vs" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
