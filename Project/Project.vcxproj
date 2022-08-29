@@ -155,11 +155,18 @@
     <ClCompile Include="test4.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="test5.cpp" />
+    <ClCompile Include="test5.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="test6.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="6.1.coordinate_systems.fs" />
     <None Include="6.1.coordinate_systems.vs" />
+    <None Include="box.fs" />
+    <None Include="box.vs" />
+    <None Include="cubemaps.fs" />
+    <None Include="cubemaps.vs" />
     <None Include="test2.fs" />
     <None Include="test2.vs" />
     <None Include="test4.fs" />
