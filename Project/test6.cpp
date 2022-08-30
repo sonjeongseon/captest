@@ -1,6 +1,6 @@
-// stb_image.h 에서 오류 다수 
+// 오류 해결
+// #define STB_IMAGE_IMPLEMENTATION 대신 파일 내 정의
 
-#define STB_IMAGE_IMPLEMENTATION
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -192,6 +192,7 @@ int main()
 
     unsigned int cubeTexture = loadTexture("textures/brick.jpg");
 
+    // textures 경로, 근데 이 부분 일반 캡쳐사진은 X 왜지
     vector<std::string> faces
     {
         "textures/box/right.jpg",
@@ -352,12 +353,15 @@ unsigned int loadTexture(char const* path)
     return textureID;
 }
 
+// box 불러오기
 unsigned int loadCubemap(vector<std::string> faces)
 {
     unsigned int textureID;
     glGenTextures(1, &textureID);
     glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
 
+    // 연속 증가하는 int형 변수 -> 간략하게 만들기위해 6개 정의 X, 반복문
+    // textures face : vector, 텍스처 위치를 순서대로 가짐
     int width, height, nrChannels;
     for (unsigned int i = 0; i < faces.size(); i++)
     {
@@ -373,11 +377,12 @@ unsigned int loadCubemap(vector<std::string> faces)
             stbi_image_free(data);
         }
     }
+    // 
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE); //GL_TEXTURE_WRAP_R : z 좌표 wrapping method 설정
 
     return textureID;
 }
