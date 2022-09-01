@@ -174,7 +174,7 @@ int main()
     unsigned int floorTexture = loadTexture("textures/metal.png");
     unsigned int transparentTexture = loadTexture("textures/lamp.png");
 
-    // box 여러개
+    // grass box 여러개
     vector<glm::vec3> vegetation
     {
         glm::vec3(-1.5f, 0.0f, -0.48f),
@@ -208,7 +208,7 @@ int main()
         shader.setMat4("projection", projection);
         shader.setMat4("view", view);
 
-        // cubes 만들기 ,, 
+        // cubes
         glBindVertexArray(cubeVAO);
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, cubeTexture);
@@ -284,7 +284,7 @@ void mouse_callback(GLFWwindow* window, double xposIn, double yposIn)
     }
 
     float xoffset = xpos - lastX;
-    float yoffset = lastY - ypos; 
+    float yoffset = lastY - ypos;
 
     lastX = xpos;
     lastY = ypos;
