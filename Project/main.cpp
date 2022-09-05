@@ -79,6 +79,37 @@ int main()
 
     // vertice 정의
 
+    float roomVertices[] = {   
+        // Back face
+        -0.5f, -0.5f, -0.5f,  0.0f, 0.0f, // Bottom-left
+         0.5f,  0.5f, -0.5f,  1.0f, 1.0f, // top-right
+         0.5f, -0.5f, -0.5f,  1.0f, 0.0f, // bottom-right         
+         0.5f,  0.5f, -0.5f,  1.0f, 1.0f, // top-right
+        -0.5f, -0.5f, -0.5f,  0.0f, 0.0f, // bottom-left
+        -0.5f,  0.5f, -0.5f,  0.0f, 1.0f, // top-left
+        // Left face
+        -0.5f,  0.5f,  0.5f,  1.0f, 0.0f, // top-right
+        -0.5f,  0.5f, -0.5f,  1.0f, 1.0f, // top-left
+        -0.5f, -0.5f, -0.5f,  0.0f, 1.0f, // bottom-left
+        -0.5f, -0.5f, -0.5f,  0.0f, 1.0f, // bottom-left
+        -0.5f, -0.5f,  0.5f,  0.0f, 0.0f, // bottom-right
+        -0.5f,  0.5f,  0.5f,  1.0f, 0.0f, // top-right
+        // Right face
+         0.5f,  0.5f,  0.5f,  1.0f, 0.0f, // top-left
+         0.5f, -0.5f, -0.5f,  0.0f, 1.0f, // bottom-right
+         0.5f,  0.5f, -0.5f,  1.0f, 1.0f, // top-right         
+         0.5f, -0.5f, -0.5f,  0.0f, 1.0f, // bottom-right
+         0.5f,  0.5f,  0.5f,  1.0f, 0.0f, // top-left
+         0.5f, -0.5f,  0.5f,  0.0f, 0.0f, // bottom-left     
+        // Bottom face
+        -0.5f, -0.5f, -0.5f,  0.0f, 1.0f, // top-right
+         0.5f, -0.5f, -0.5f,  1.0f, 1.0f, // top-left
+         0.5f, -0.5f,  0.5f,  1.0f, 0.0f, // bottom-left
+         0.5f, -0.5f,  0.5f,  1.0f, 0.0f, // bottom-left
+        -0.5f, -0.5f,  0.5f,  0.0f, 0.0f, // bottom-right
+        -0.5f, -0.5f, -0.5f,  0.0f, 1.0f, // top-right
+    };
+
     float boxVertices[] = { // boxVertices
         // positions          
         -1.0f,  1.0f, -1.0f,
@@ -126,6 +157,17 @@ int main()
 
     // VAO, VBO
 
+    unsigned int roomVAO, roomVBO; //room VAO, BAO
+    glGenVertexArrays(1, &roomVAO);
+    glGenBuffers(1, &roomVBO);
+    glBindVertexArray(roomVAO);
+    glBindBuffer(GL_ARRAY_BUFFER, roomVBO);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(roomVertices), &roomVertices, GL_STATIC_DRAW);
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+    glEnableVertexAttribArray(1);
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+
     unsigned int boxVAO, boxVBO; // boxVAO, VBO
     glGenVertexArrays(1, &boxVAO);
     glGenBuffers(1, &boxVBO);
@@ -134,6 +176,9 @@ int main()
     glBufferData(GL_ARRAY_BUFFER, sizeof(boxVertices), &boxVertices, GL_STATIC_DRAW);
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+
+    // room JPG
+    unsigned int roomTexture = loadTexture("textures/marble.jpg");
 
     // box JPG
     vector<std::string> faces
@@ -147,6 +192,10 @@ int main()
     };
 
     unsigned int cubemapTexture = loadCubemap(faces);
+
+    // 
+    shader.use();
+    shader.setInt("texture1", 0);
 
     // shader 사용
     boxShader.use();
@@ -175,6 +224,13 @@ int main()
         shader.setMat4("view", view);
         shader.setMat4("projection", projection);
 
+        // room
+        glBindVertexArray(roomVAO);
+        glActiveTexture(GL_TEXTURE0);
+        glBindTexture(GL_TEXTURE_2D, roomTexture);
+        glDrawArrays(GL_TRIANGLES, 0, 36);
+        glBindVertexArray(0);
+
         // draw box as last
         glDepthFunc(GL_LEQUAL);
         boxShader.use();
@@ -195,7 +251,9 @@ int main()
     }
 
     // ?!
+    glDeleteVertexArrays(1, &roomVAO);
     glDeleteVertexArrays(1, &boxVAO);
+    glDeleteBuffers(1, &roomVBO);
     glDeleteBuffers(1, &boxVBO);
 
     //
