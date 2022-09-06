@@ -75,7 +75,12 @@ int main()
     // 사용할 shader 정의
 
     Shader boxShader("box.vs", "box.fs"); // 배경 box
-    Shader shader("cubemaps.vs", "cubemaps.fs"); // cubemap
+    Shader mapShader("cubemaps.vs", "cubemaps.fs"); // cubemap
+    Shader lampShader("lamp.vs", "lamp.fs");
+
+    // 사용할 model 정의
+
+    Model lampModel("objects/lamp2.obj");
 
     // vertice 정의
 
@@ -179,23 +184,27 @@ int main()
 
     // room JPG
     unsigned int roomTexture = loadTexture("textures/marble.jpg");
+    unsigned int lampTexture = loadTexture("textures/black.jpg");
 
     // box JPG
     vector<std::string> faces
     {
-        "textures/darkcity/right.jpg",
-        "textures/darkcity/left.jpg",
-        "textures/darkcity/top.jpg",
-        "textures/darkcity/bottom.jpg",
-        "textures/darkcity/front.jpg",
-        "textures/darkcity/back.jpg"
+        "textures/skybox/right.jpg",
+        "textures/skybox/left.jpg",
+        "textures/skybox/top.jpg",
+        "textures/skybox/bottom.jpg",
+        "textures/skybox/front.jpg",
+        "textures/skybox/back.jpg"
     };
 
     unsigned int cubemapTexture = loadCubemap(faces);
 
     // 
-    shader.use();
-    shader.setInt("texture1", 0);
+    mapShader.use();
+    mapShader.setInt("texture1", 0);
+
+    //lampShader.use();
+    //lampShader.setInt("texture2", 1);
 
     // shader 사용
     boxShader.use();
@@ -216,13 +225,23 @@ int main()
         glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        shader.use();
+        mapShader.use();
         glm::mat4 model = glm::mat4(1.0f);
         glm::mat4 view = camera.GetViewMatrix();
         glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
-        shader.setMat4("model", model);
-        shader.setMat4("view", view);
-        shader.setMat4("projection", projection);
+        mapShader.setMat4("model", model);
+        mapShader.setMat4("view", view);
+        mapShader.setMat4("projection", projection);
+
+        // lamp model
+        //lampShader.use();
+        glm::mat4 model = glm::mat4(1.0f);
+        model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
+        model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));	// it's a bit too big for our scene, so scale it down
+        // lamp texture 추가
+        glBindTexture(GL_TEXTURE_2D, lampTexture);
+        lampShader.setMat4("lampmodel", model);
+        lampModel.Draw(lampShader);
 
         // room
         glBindVertexArray(roomVAO);

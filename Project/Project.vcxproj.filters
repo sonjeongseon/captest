@@ -98,5 +98,11 @@
     <None Include="cubemaps.vs">
       <Filter>소스 파일\main</Filter>
     </None>
+    <None Include="lamp.vs">
+      <Filter>소스 파일\main</Filter>
+    </None>
+    <None Include="lamp.fs">
+      <Filter>소스 파일</Filter>
+    </None>
   </ItemGroup>
 </Project>

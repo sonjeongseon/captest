@@ -181,6 +181,8 @@
     <None Include="box.vs" />
     <None Include="cubemaps.fs" />
     <None Include="cubemaps.vs" />
+    <None Include="lamp.fs" />
+    <None Include="lamp.vs" />
     <None Include="test2.fs">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </None>
