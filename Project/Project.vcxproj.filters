@@ -13,78 +13,102 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="소스 파일\test&amp;study">
+      <UniqueIdentifier>{d70b92d1-fa27-4fea-86ce-125571d13700}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\main">
+      <UniqueIdentifier>{05dd7ac5-4d06-4d05-b839-ba15d8cca943}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\..\..\..\OpenGL\glad\src\glad.c">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\test&amp;study</Filter>
+    </ClCompile>
+    <ClCompile Include="stb_image.cpp">
+      <Filter>소스 파일\test&amp;study</Filter>
     </ClCompile>
     <ClCompile Include="test1.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\test&amp;study</Filter>
     </ClCompile>
     <ClCompile Include="test2.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\test&amp;study</Filter>
     </ClCompile>
     <ClCompile Include="test3.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\test&amp;study</Filter>
     </ClCompile>
     <ClCompile Include="test4.cpp">
+      <Filter>소스 파일\test&amp;study</Filter>
+    </ClCompile>
+    <ClCompile Include="test5.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="test6.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="stb_image.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\test&amp;study</Filter>
     </ClCompile>
     <ClCompile Include="test7.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\test&amp;study</Filter>
     </ClCompile>
     <ClCompile Include="test8.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\test&amp;study</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>소스 파일\main</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="6.1.coordinate_systems.vs">
-      <Filter>소스 파일</Filter>
-    </None>
     <None Include="6.1.coordinate_systems.fs">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\test&amp;study</Filter>
     </None>
-    <None Include="test2.fs">
-      <Filter>소스 파일</Filter>
+    <None Include="6.1.coordinate_systems.vs">
+      <Filter>소스 파일\test&amp;study</Filter>
     </None>
     <None Include="test2.vs">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\test&amp;study</Filter>
     </None>
-    <None Include="test4.vs">
-      <Filter>소스 파일</Filter>
+    <None Include="test2.fs">
+      <Filter>소스 파일\test&amp;study</Filter>
     </None>
     <None Include="test4.fs">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\test&amp;study</Filter>
     </None>
-    <None Include="test5.vs">
-      <Filter>소스 파일</Filter>
+    <None Include="test4.vs">
+      <Filter>소스 파일\test&amp;study</Filter>
     </None>
     <None Include="test5.fs">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\test&amp;study</Filter>
     </None>
-    <None Include="box.vs">
-      <Filter>소스 파일</Filter>
-    </None>
-    <None Include="box.fs">
-      <Filter>소스 파일</Filter>
-    </None>
-    <None Include="cubemaps.vs">
-      <Filter>소스 파일</Filter>
-    </None>
-    <None Include="cubemaps.fs">
-      <Filter>소스 파일</Filter>
+    <None Include="test5.vs">
+      <Filter>소스 파일\test&amp;study</Filter>
     </None>
     <None Include="test7.fs">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\test&amp;study</Filter>
     </None>
     <None Include="test7.vs">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\test&amp;study</Filter>
+    </None>
+    <None Include="box.fs">
+      <Filter>소스 파일\main</Filter>
+    </None>
+    <None Include="box.vs">
+      <Filter>소스 파일\main</Filter>
+    </None>
+    <None Include="cubemaps.fs">
+      <Filter>소스 파일\main</Filter>
+    </None>
+    <None Include="cubemaps.vs">
+      <Filter>소스 파일\main</Filter>
+    </None>
+    <None Include="lamp.vs">
+      <Filter>소스 파일\main</Filter>
+    </None>
+    <None Include="lamp.fs">
+      <Filter>소스 파일\main</Filter>
+    </None>
+    <None Include="aircon.vs">
+      <Filter>소스 파일\main</Filter>
+    </None>
+    <None Include="aircon.fs">
+      <Filter>소스 파일\main</Filter>
     </None>
   </ItemGroup>
 </Project>
