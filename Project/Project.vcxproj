@@ -177,6 +177,8 @@
     <None Include="6.1.coordinate_systems.vs">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </None>
+    <None Include="aircon.fs" />
+    <None Include="aircon.vs" />
     <None Include="box.fs" />
     <None Include="box.vs" />
     <None Include="cubemaps.fs" />

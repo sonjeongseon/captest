@@ -77,10 +77,12 @@ int main()
     Shader boxShader("box.vs", "box.fs"); // 배경 box
     Shader mapShader("cubemaps.vs", "cubemaps.fs"); // cubemap
     Shader lampShader("lamp.vs", "lamp.fs");
+    Shader airShader("aircon.vs", "aircon.fs");
 
     // 사용할 model 정의
 
     Model lampModel("objects/lamp2.obj");
+    Model airModel("objects/aircon.obj");
 
     // vertice 정의
 
@@ -182,9 +184,11 @@ int main()
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 
+
     // room JPG
     unsigned int roomTexture = loadTexture("textures/marble.jpg");
     unsigned int lampTexture = loadTexture("textures/black.jpg");
+    unsigned int airTexture = loadTexture("textures/grey.jpg");
 
     // box JPG
     vector<std::string> faces
@@ -204,7 +208,10 @@ int main()
     mapShader.setInt("texture1", 0);
 
     //lampShader.use();
-    //lampShader.setInt("texture2", 1);
+    //lampShader.setInt("texture_diffuse1", 1);
+
+    //airShader.use();
+    //airShader.setInt("texture_diffuse2", 2);
 
     // shader 사용
     boxShader.use();
@@ -222,7 +229,7 @@ int main()
         processInput(window);
 
         // render
-        glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+        glClearColor(0.05f, 0.05f, 0.05f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         mapShader.use();
@@ -233,22 +240,34 @@ int main()
         mapShader.setMat4("view", view);
         mapShader.setMat4("projection", projection);
 
-        // lamp model
-        //lampShader.use();
-        glm::mat4 model = glm::mat4(1.0f);
-        model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
-        model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));	// it's a bit too big for our scene, so scale it down
-        // lamp texture 추가
-        glBindTexture(GL_TEXTURE_2D, lampTexture);
-        lampShader.setMat4("lampmodel", model);
-        lampModel.Draw(lampShader);
-
         // room
         glBindVertexArray(roomVAO);
         glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_2D, roomTexture);
+        //glBindTexture(GL_TEXTURE_2D, roomTexture);
         glDrawArrays(GL_TRIANGLES, 0, 36);
         glBindVertexArray(0);
+
+        // lamp model
+        lampShader.use();
+        glm::mat4 lampmodel = glm::mat4(1.0f);
+        lampmodel = glm::translate(lampmodel, glm::vec3(0.25f, -0.35f, 0.0f));
+        lampmodel = glm::scale(lampmodel, glm::vec3(0.02f, 0.02f, 0.02f));
+        //glBindTexture(GL_TEXTURE_2D, lampTexture);
+        lampShader.setMat4("lampmodel", lampmodel);
+        lampShader.setMat4("view", view);
+        lampShader.setMat4("projection", projection);
+        lampModel.Draw(lampShader);
+
+        // airconditioner model
+        airShader.use();
+        glm::mat4 airmodel = glm::mat4(1.0f);
+        airmodel = glm::translate(airmodel, glm::vec3(-0.05f, -1.1f, 1.0f));
+        airmodel = glm::scale(airmodel, glm::vec3(0.8f, 0.8f, 0.8f));
+        glBindTexture(GL_TEXTURE_2D, airTexture);
+        airShader.setMat4("airmodel", airmodel);
+        airShader.setMat4("view", view);
+        airShader.setMat4("projection", projection);
+        airModel.Draw(airShader);
 
         // draw box as last
         glDepthFunc(GL_LEQUAL);

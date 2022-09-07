@@ -102,7 +102,13 @@
       <Filter>소스 파일\main</Filter>
     </None>
     <None Include="lamp.fs">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\main</Filter>
+    </None>
+    <None Include="aircon.vs">
+      <Filter>소스 파일\main</Filter>
+    </None>
+    <None Include="aircon.fs">
+      <Filter>소스 파일\main</Filter>
     </None>
   </ItemGroup>
 </Project>
