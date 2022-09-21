@@ -174,7 +174,7 @@ int main()
     unsigned int floorTexture = loadTexture("textures/metal.png");
     unsigned int transparentTexture = loadTexture("textures/lamp.png");
 
-    // grass box ¿©·¯°³
+    // grass box Â¿Â©Â·Â¯Â°Â³
     vector<glm::vec3> vegetation
     {
         glm::vec3(-1.5f, 0.0f, -0.48f),
