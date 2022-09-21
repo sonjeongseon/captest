@@ -174,7 +174,7 @@ int main()
     unsigned int floorTexture = loadTexture("textures/metal.png");
     unsigned int transparentTexture = loadTexture("textures/lamp.png");
 
-    // box ¿©·¯°³
+    // box Â¿Â©Â·Â¯Â°Â³
     vector<glm::vec3> vegetation
     {
         glm::vec3(-1.5f, 0.0f, -0.48f),
@@ -208,7 +208,7 @@ int main()
         shader.setMat4("projection", projection);
         shader.setMat4("view", view);
 
-        // cubes ¸¸µé±â ,, 
+        // cubes Â¸Â¸ÂµÃ©Â±Ã¢ ,, 
         glBindVertexArray(cubeVAO);
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, cubeTexture);
