@@ -1,5 +1,4 @@
-// cubemap(box) 만들기 완료
-// camera wasd 작동 안됨 -> 아마 기준이 되는 cube가 없어서 그런것같음
+//오류수정
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -243,7 +242,7 @@ int main()
         // room
         glBindVertexArray(roomVAO);
         glActiveTexture(GL_TEXTURE0);
-        //glBindTexture(GL_TEXTURE_2D, roomTexture);
+        glBindTexture(GL_TEXTURE_2D, roomTexture);
         glDrawArrays(GL_TRIANGLES, 0, 36);
         glBindVertexArray(0);
 
@@ -252,7 +251,7 @@ int main()
         glm::mat4 lampmodel = glm::mat4(1.0f);
         lampmodel = glm::translate(lampmodel, glm::vec3(0.25f, -0.35f, 0.0f));
         lampmodel = glm::scale(lampmodel, glm::vec3(0.02f, 0.02f, 0.02f));
-        //glBindTexture(GL_TEXTURE_2D, lampTexture);
+        glBindTexture(GL_TEXTURE_2D, lampTexture);
         lampShader.setMat4("lampmodel", lampmodel);
         lampShader.setMat4("view", view);
         lampShader.setMat4("projection", projection);
@@ -299,12 +298,12 @@ int main()
     return 0;
 }
 
-// camera
 void processInput(GLFWwindow* window)
 {
     if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
         glfwSetWindowShouldClose(window, true);
 
+    // camera
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
         camera.ProcessKeyboard(FORWARD, deltaTime);
     if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
@@ -313,6 +312,7 @@ void processInput(GLFWwindow* window)
         camera.ProcessKeyboard(LEFT, deltaTime);
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
         camera.ProcessKeyboard(RIGHT, deltaTime);
+
 }
 
 
