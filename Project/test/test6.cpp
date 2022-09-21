@@ -1,5 +1,5 @@
-// ¿À·ù ÇØ°á
-// #define STB_IMAGE_IMPLEMENTATION ´ë½Å ÆÄÀÏ ³» Á¤ÀÇ
+// ì˜¤ë¥˜ í•´ê²°
+// #define STB_IMAGE_IMPLEMENTATION ëŒ€ì‹  íŒŒì¼ ë‚´ ì •ì˜
 
 
 #include <glad/glad.h>
@@ -192,7 +192,7 @@ int main()
 
     unsigned int cubeTexture = loadTexture("textures/brick.jpg");
 
-    // textures °æ·Î, ±Ùµ¥ ÀÌ ºÎºĞ ÀÏ¹İ Ä¸ÃÄ»çÁøÀº X ¿ÖÁö
+    // textures ê²½ë¡œ, ê·¼ë° ì´ ë¶€ë¶„ ì¼ë°˜ ìº¡ì³ì‚¬ì§„ì€ X ì™œì§€
     vector<std::string> faces
     {
         "textures/box/right.jpg",
@@ -353,15 +353,15 @@ unsigned int loadTexture(char const* path)
     return textureID;
 }
 
-// box ºÒ·¯¿À±â
+// box ë¶ˆëŸ¬ì˜¤ê¸°
 unsigned int loadCubemap(vector<std::string> faces)
 {
     unsigned int textureID;
     glGenTextures(1, &textureID);
     glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
 
-    // ¿¬¼Ó Áõ°¡ÇÏ´Â intÇü º¯¼ö -> °£·«ÇÏ°Ô ¸¸µé±âÀ§ÇØ 6°³ Á¤ÀÇ X, ¹İº¹¹®
-    // textures face : vector, ÅØ½ºÃ³ À§Ä¡¸¦ ¼ø¼­´ë·Î °¡Áü
+    // ì—°ì† ì¦ê°€í•˜ëŠ” intí˜• ë³€ìˆ˜ -> ê°„ëµí•˜ê²Œ ë§Œë“¤ê¸°ìœ„í•´ 6ê°œ ì •ì˜ X, ë°˜ë³µë¬¸
+    // textures face : vector, í…ìŠ¤ì²˜ ìœ„ì¹˜ë¥¼ ìˆœì„œëŒ€ë¡œ ê°€ì§
     int width, height, nrChannels;
     for (unsigned int i = 0; i < faces.size(); i++)
     {
@@ -382,7 +382,7 @@ unsigned int loadCubemap(vector<std::string> faces)
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE); //GL_TEXTURE_WRAP_R : z ÁÂÇ¥ wrapping method ¼³Á¤
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE); //GL_TEXTURE_WRAP_R : z ì¢Œí‘œ wrapping method ì„¤ì •
 
     return textureID;
 }
