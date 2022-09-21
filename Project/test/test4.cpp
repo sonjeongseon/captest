@@ -1,14 +1,14 @@
-// camera ±â´É±îÁö ³ÖÀº °Í
+// camera ê¸°ëŠ¥ê¹Œì§€ ë„£ì€ ê²ƒ
 
 #define STB_IMAGE_IMPLEMENTATION
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
-#include <STB/stb_image.h>// ½Ì±Û Çì´õ ÀÌ¹ÌÁö·Îµå ¶óÀÌºê·¯¸®
+#include <STB/stb_image.h>// ì‹±ê¸€ í—¤ë” ì´ë¯¸ì§€ë¡œë“œ ë¼ì´ë¸ŒëŸ¬ë¦¬
 
-#include <glm/glm.hpp> // GLM ±âº» Çì´õ, ¿©·¯ ÀÚ·áÇü Æ÷ÇÔ
-#include <glm/gtc/matrix_transform.hpp>// Çà·Ä º¯È¯¿¡ »ç¿ëµÇ´Â ÇÔ¼ö ¸ğÀ½
-#include <glm/gtc/type_ptr.hpp>// GLM ÀÚ·áÇüµéÀÇ ¸Ş¸ğ¸® °ü·Ã ±â´É
+#include <glm/glm.hpp> // GLM ê¸°ë³¸ í—¤ë”, ì—¬ëŸ¬ ìë£Œí˜• í¬í•¨
+#include <glm/gtc/matrix_transform.hpp>// í–‰ë ¬ ë³€í™˜ì— ì‚¬ìš©ë˜ëŠ” í•¨ìˆ˜ ëª¨ìŒ
+#include <glm/gtc/type_ptr.hpp>// GLM ìë£Œí˜•ë“¤ì˜ ë©”ëª¨ë¦¬ ê´€ë ¨ ê¸°ëŠ¥
 
 #include <SHADERS/shader.h>
 
@@ -24,11 +24,11 @@ const unsigned int SCR_WIDTH = 1600;
 const unsigned int SCR_HEIGHT = 900;
 
 //camera
-glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);// camera À§Ä¡ ¼³Á¤
+glm::vec3 cameraPos = glm::vec3(0.0f, 0.0f, 3.0f);// camera ìœ„ì¹˜ ì„¤ì •
 glm::vec3 cameraFront = glm::vec3(0.0f, 0.0f, -1.0f);//zoom
-glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);// xÃà
+glm::vec3 cameraUp = glm::vec3(0.0f, 1.0f, 0.0f);// xì¶•
 
-// Á¡ÇÁ ¹æÁö
+// ì í”„ ë°©ì§€
 bool firstMouse = true;
 float yaw = -90.0f;
 float pitch = 0.0f;
@@ -36,9 +36,9 @@ float lastX = 800.0f / 2.0;
 float lastY = 600.0 / 2.0;
 float fov = 45.0f;
 
-// ·»´õ¸µ ÇÏ´Âµ¥ °É¸®´Â ½Ã°£
-float deltaTime = 0.0f;	// ¸¶Áö¸· frame ~ ÇöÀç frame
-float lastFrame = 0.0f; // ¸¶Áö¸· frame
+// ë Œë”ë§ í•˜ëŠ”ë° ê±¸ë¦¬ëŠ” ì‹œê°„
+float deltaTime = 0.0f;	// ë§ˆì§€ë§‰ frame ~ í˜„ì¬ frame
+float lastFrame = 0.0f; // ë§ˆì§€ë§‰ frame
 
 int main()
 {
@@ -58,35 +58,35 @@ int main()
         glfwTerminate();
         return -1;
     }
-    // ÇöÀç À©µµ¿ìÀÇ context¸¦ ÇöÀç ½º·¹µåÀÇ ÁÖ context·Î ¼³Á¤
+    // í˜„ì¬ ìœˆë„ìš°ì˜ contextë¥¼ í˜„ì¬ ìŠ¤ë ˆë“œì˜ ì£¼ contextë¡œ ì„¤ì •
     glfwMakeContextCurrent(window);
-    // bufferÀÇ Å©±â°¡ º¯°æµÉ ¶§ È£ÃâµÇ´Â Äİ¹é
+    // bufferì˜ í¬ê¸°ê°€ ë³€ê²½ë  ë•Œ í˜¸ì¶œë˜ëŠ” ì½œë°±
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
     glfwSetCursorPosCallback(window, mouse_callback);
     glfwSetScrollCallback(window, scroll_callback);
 
-    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);// cursor capture -> Æ÷Ä¿½º µÇ¸é Ä¿¼­¸¦ À©µµ¿ì Ã¢ ¾È¿¡ °¡µÎ±â
+    glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);// cursor capture -> í¬ì»¤ìŠ¤ ë˜ë©´ ì»¤ì„œë¥¼ ìœˆë„ìš° ì°½ ì•ˆì— ê°€ë‘ê¸°
 
     // glad: load all OpenGL function pointers
-    // glad ÃÊ±âÈ­
-    // GLFW´Â os¿¡ µû¶ó ¿Ã¹Ù¸¥ ÇÔ¼ö¸¦ Á¤ÀÇÇÏ´Â glfwGetProcAddress Á¦°ø
+    // glad ì´ˆê¸°í™”
+    // GLFWëŠ” osì— ë”°ë¼ ì˜¬ë°”ë¥¸ í•¨ìˆ˜ë¥¼ ì •ì˜í•˜ëŠ” glfwGetProcAddress ì œê³µ
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
     {
         std::cout << "Failed to initialize GLAD" << std::endl;
         return -1;
     }
 
-    // È°¼ºÈ­
+    // í™œì„±í™”
     glEnable(GL_CULL_FACE);
     glCullFace(GL_BACK);
     glFrontFace(GL_CW);
 
-    //glEnable(GL_DEPTH_TEST); // À§¿¡ Ãß°¡ÇÏ¸é¼­ ºñÈ°¼ºÈ­
+    //glEnable(GL_DEPTH_TEST); // ìœ„ì— ì¶”ê°€í•˜ë©´ì„œ ë¹„í™œì„±í™”
 
     Shader ourShader("test4.vs", "test4.fs");
 
-    // vertices ¹è¿­¿¡ floatÅ¸ÀÔ ÄÃ·¯ µ¥ÀÌÅÍ Ãß°¡
-    // = ÅØ½ºÃ³ ÁÂÇ¥¸¦ vertex µ¥ÀÌÅÍ¿¡ Ãß°¡
+    // vertices ë°°ì—´ì— floatíƒ€ì… ì»¬ëŸ¬ ë°ì´í„° ì¶”ê°€
+    // = í…ìŠ¤ì²˜ ì¢Œí‘œë¥¼ vertex ë°ì´í„°ì— ì¶”ê°€
     float vertices[] = {
         // Back face
         -0.5f, -0.5f, -0.5f,  0.0f, 0.0f, // Bottom-left
@@ -142,7 +142,7 @@ int main()
     glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
     // position attribute
-    // vertex attribute¸¦ Ãß°¡Çß±â ¶§¹®¿¡ ´Ù½Ã ¾Ë·ÁÁà¾ßÇÔ
+    // vertex attributeë¥¼ ì¶”ê°€í–ˆê¸° ë•Œë¬¸ì— ë‹¤ì‹œ ì•Œë ¤ì¤˜ì•¼í•¨
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
     // texture coord attribute
@@ -156,15 +156,15 @@ int main()
     glGenTextures(2, texture);
     glBindTexture(GL_TEXTURE_2D, texture[0]);
 
-    // ÅØ½ºÃ³ ·¦ÇÎ
-    // ÆÄ¶ó¹ÌÅÍ 1 : ÅØ½ºÃ³ Å¸°Ù ÁöÁ¤
-    // ÆÄ¶ó¹ÌÅÍ 2 : ¼³Á¤ÇÒ ¿É¼Ç, ¾î¶² Ãà¿¡ Àû¿ëÇÒ °ÍÀÎÁö ÁöÁ¤
-    // ÆÄ¶ó¹ÌÅÍ 3 : ÅØ½ºÃ³ wrapping ¸ğµå ¼³Á¤
+    // í…ìŠ¤ì²˜ ë©í•‘
+    // íŒŒë¼ë¯¸í„° 1 : í…ìŠ¤ì²˜ íƒ€ê²Ÿ ì§€ì •
+    // íŒŒë¼ë¯¸í„° 2 : ì„¤ì •í•  ì˜µì…˜, ì–´ë–¤ ì¶•ì— ì ìš©í•  ê²ƒì¸ì§€ ì§€ì •
+    // íŒŒë¼ë¯¸í„° 3 : í…ìŠ¤ì²˜ wrapping ëª¨ë“œ ì„¤ì •
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
-    // ÅØ½ºÃ³ ÇÊÅÍ¸µ
-    // GL_LINEAR´Â GL_NEARESTº¸´Ù Á» ´õ °æ°è°¡ ºÒºĞ¸í -> ¸Å²ô·¯¿ò
+    // í…ìŠ¤ì²˜ í•„í„°ë§
+    // GL_LINEARëŠ” GL_NEARESTë³´ë‹¤ ì¢€ ë” ê²½ê³„ê°€ ë¶ˆë¶„ëª… -> ë§¤ë„ëŸ¬ì›€
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
@@ -172,9 +172,9 @@ int main()
     int width, height, nrChannels;
     stbi_set_flip_vertically_on_load(true);
 
-    // ÀÌ¹ÌÁö ·Îµå
-    // ÆÄ¶ó¹ÌÅÍ 1 : ÀÌ¹ÌÁö ÆÄÀÏ °æ·Î ¹Ş±â
-    // ÆÄ¶ó¹ÌÅÍ 2, 3, 4 : ÀÌ¹ÌÁöÀÇ ³Êºñ, ³ôÀÌ, ÄÃ·¯ Ã¤³Î ¼ö(ÀüºÎ Á¤¼öÇü º¯¼ö)
+    // ì´ë¯¸ì§€ ë¡œë“œ
+    // íŒŒë¼ë¯¸í„° 1 : ì´ë¯¸ì§€ íŒŒì¼ ê²½ë¡œ ë°›ê¸°
+    // íŒŒë¼ë¯¸í„° 2, 3, 4 : ì´ë¯¸ì§€ì˜ ë„ˆë¹„, ë†’ì´, ì»¬ëŸ¬ ì±„ë„ ìˆ˜(ì „ë¶€ ì •ìˆ˜í˜• ë³€ìˆ˜)
     unsigned char* data = stbi_load("textures/brick.jpg", &width, &height, &nrChannels, 0);
     if (data)
     {
@@ -190,24 +190,24 @@ int main()
     ourShader.use();
     ourShader.setInt("texture", 0);
 
-    // loop µ¹¶§¸¶´Ù GPU¿¡ perspective projection ¾÷·Îµå
+    // loop ëŒë•Œë§ˆë‹¤ GPUì— perspective projection ì—…ë¡œë“œ
     glm::mat4 projection = glm::perspective(glm::radians(45.0f), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100.0f);
     ourShader.setMat4("projection", projection);
 
 
     while (!glfwWindowShouldClose(window))
     {
-        //fame¸¶´Ù delta °ª °è»ê
+        //fameë§ˆë‹¤ delta ê°’ ê³„ì‚°
         float currentFrame = static_cast<float>(glfwGetTime());
         deltaTime = currentFrame - lastFrame;
         lastFrame = currentFrame;
 
-        // input Ã³¸®
+        // input ì²˜ë¦¬
         processInput(window);
 
-        // buffer ÃÊ±âÈ­
-        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);// È­¸éÀÇ ÄÃ·¯ ¹öÆÛ Áö¿ì±â, ¾î¶² »öÀ¸·Î Áö¿ïÁö ¼³Á¤(»óÅÂ ¼³Á¤ ÇÔ¼ö)
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); //»ç¿ë °¡´É ºñÆ® : color, depth, stencil, ÀÏ´Ü ÄÃ·¯°ª¸¸ »ı°¢ÇØ¼­ ±×°Í¸¸ Áö¿ò(»óÅÂ »ç¿ë ÇÔ¼ö) 
+        // buffer ì´ˆê¸°í™”
+        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);// í™”ë©´ì˜ ì»¬ëŸ¬ ë²„í¼ ì§€ìš°ê¸°, ì–´ë–¤ ìƒ‰ìœ¼ë¡œ ì§€ìš¸ì§€ ì„¤ì •(ìƒíƒœ ì„¤ì • í•¨ìˆ˜)
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); //ì‚¬ìš© ê°€ëŠ¥ ë¹„íŠ¸ : color, depth, stencil, ì¼ë‹¨ ì»¬ëŸ¬ê°’ë§Œ ìƒê°í•´ì„œ ê·¸ê²ƒë§Œ ì§€ì›€(ìƒíƒœ ì‚¬ìš© í•¨ìˆ˜) 
 
         // bind textures on corresponding texture units
         glActiveTexture(GL_TEXTURE0);
@@ -216,8 +216,8 @@ int main()
         // activate shader
         ourShader.use();
 
-        // glm::perspective : ´«¿¡ º¸ÀÌ´Â °ø°£À» Á¤ÀÇÇÏ´Â ±ÕÀÏÇÏÁö ¾ÊÀº »óÀÚ¸ğ¾ç(ÀıµµÃ¼) »ı¼º
-        glm::mat4 view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);//À§Ä¡, Å¸°Ù, À§ÂÊº¤ÅÍ
+        // glm::perspective : ëˆˆì— ë³´ì´ëŠ” ê³µê°„ì„ ì •ì˜í•˜ëŠ” ê· ì¼í•˜ì§€ ì•Šì€ ìƒìëª¨ì–‘(ì ˆë„ì²´) ìƒì„±
+        glm::mat4 view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);//ìœ„ì¹˜, íƒ€ê²Ÿ, ìœ„ìª½ë²¡í„°
         ourShader.setMat4("view", view);
 
         // render box
@@ -225,38 +225,38 @@ int main()
         for (unsigned int i = 0; i < 10; i++)
         {
             glm::mat4 model = glm::mat4(1.0f);
-            model = glm::rotate(model, glm::radians(50.0f), glm::vec3(0.5f, 1.0f, 0.2f));// ÀÌºÎºĞ ¼öÁ¤, È¸Àü ¹æÁö ÀÔ·Â
+            model = glm::rotate(model, glm::radians(50.0f), glm::vec3(0.5f, 1.0f, 0.2f));// ì´ë¶€ë¶„ ìˆ˜ì •, íšŒì „ ë°©ì§€ ì…ë ¥
             ourShader.setMat4("model", model);
 
             glDrawArrays(GL_TRIANGLES, 0, 36);
         }
 
-        glfwSwapBuffers(window);// ÄÃ·¯¹öÆÛ(¹İº¹ Áß ÀÌ¹ÌÁö ±×¸®°í È­¸é¿¡ Ãâ·ÂÇÏ´Â ±â´É) ±³Ã¼
-        glfwPollEvents();// ÀÌº¥Æ® ¹ß»ı È®ÀÎ -> À©µµ¿ì »óÅÂ ¾÷µ¥ÀÌÆ®, Á¤ÇØÁø ÇÔ¼ö È£Ãâ
+        glfwSwapBuffers(window);// ì»¬ëŸ¬ë²„í¼(ë°˜ë³µ ì¤‘ ì´ë¯¸ì§€ ê·¸ë¦¬ê³  í™”ë©´ì— ì¶œë ¥í•˜ëŠ” ê¸°ëŠ¥) êµì²´
+        glfwPollEvents();// ì´ë²¤íŠ¸ ë°œìƒ í™•ì¸ -> ìœˆë„ìš° ìƒíƒœ ì—…ë°ì´íŠ¸, ì •í•´ì§„ í•¨ìˆ˜ í˜¸ì¶œ
     }
 
     glDeleteVertexArrays(1, &VAO);
     glDeleteBuffers(1, &VBO);
 
-    glfwTerminate();// ·»´õ¸µ ·çÇÁ Á¾·áµÇ¸é ÇÒ´çµÇ¾ú´ø ¸ğµç ÀÚ¿ø Á¤¸®/»èÁ¦
+    glfwTerminate();// ë Œë”ë§ ë£¨í”„ ì¢…ë£Œë˜ë©´ í• ë‹¹ë˜ì—ˆë˜ ëª¨ë“  ìì› ì •ë¦¬/ì‚­ì œ
     return 0;
 }
 
-//ÀÔ·Â °ü¸®
-//glfwGetKey : Å°º¸µå Å°¿Í ÇÔ²² À©µµ¿ì ÀÔ·Â ¹ŞÀ» ¼ö ÀÖÀ½, ÇØ´ç Å°°¡ ´­·ÁÁ® ÀÖ´ÂÁö ¿©ºÎ ¸®ÅÏ
+//ì…ë ¥ ê´€ë¦¬
+//glfwGetKey : í‚¤ë³´ë“œ í‚¤ì™€ í•¨ê»˜ ìœˆë„ìš° ì…ë ¥ ë°›ì„ ìˆ˜ ìˆìŒ, í•´ë‹¹ í‚¤ê°€ ëˆŒë ¤ì ¸ ìˆëŠ”ì§€ ì—¬ë¶€ ë¦¬í„´
 void processInput(GLFWwindow* window)
 {
-    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)//ESC ´­·¶´ÂÁö È®ÀÎ -> ´­·¶À¸¸é true->GLFW ´İÀ½
+    if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)//ESC ëˆŒë €ëŠ”ì§€ í™•ì¸ -> ëˆŒë €ìœ¼ë©´ true->GLFW ë‹«ìŒ
         glfwSetWindowShouldClose(window, true);
 
-    //WASD Å° À§Ä¡ 
+    //WASD í‚¤ ìœ„ì¹˜ 
     float cameraSpeed = static_cast<float>(2.5 * deltaTime);
     if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
         cameraPos += cameraSpeed * cameraFront;
     if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
         cameraPos -= cameraSpeed * cameraFront;
     if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-        cameraPos -= glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;//¿ÜÀû
+        cameraPos -= glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;//ì™¸ì 
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
         cameraPos += glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
 }
@@ -267,14 +267,14 @@ void framebuffer_size_callback(GLFWwindow* window, int width, int height)
     glViewport(0, 0, width, height);
 }
 
-// yaw, pitch °ª °è»ê À§ÇÑ 
-// xposln , yposln : ÇöÀç ¸¶¿ì½º À§Ä¡
+// yaw, pitch ê°’ ê³„ì‚° ìœ„í•œ 
+// xposln , yposln : í˜„ì¬ ë§ˆìš°ìŠ¤ ìœ„ì¹˜
 void mouse_callback(GLFWwindow* window, double xposIn, double yposIn)
 {
     float xpos = static_cast<float>(xposIn);
     float ypos = static_cast<float>(yposIn);
 
-    // 1) ¸¶¿ì½º offset ±¸ÇÏ±â
+    // 1) ë§ˆìš°ìŠ¤ offset êµ¬í•˜ê¸°
     if (firstMouse)
     {
         lastX = xpos;
@@ -282,13 +282,13 @@ void mouse_callback(GLFWwindow* window, double xposIn, double yposIn)
         firstMouse = false;
     }
 
-    // 2) ¸¶¿ì½º callback ÇÔ¼ö¿¡¼­ ¸¶Áö¸·~ÇöÀç »çÀÌÀÇ ¿òÁ÷ÀÓ offset °è»ê
+    // 2) ë§ˆìš°ìŠ¤ callback í•¨ìˆ˜ì—ì„œ ë§ˆì§€ë§‰~í˜„ì¬ ì‚¬ì´ì˜ ì›€ì§ì„ offset ê³„ì‚°
     float xoffset = xpos - lastX;
     float yoffset = lastY - ypos; 
     lastX = xpos;
     lastY = ypos;
 
-    // ¸¶¿ì½º °¨µµ Á¶Àı
+    // ë§ˆìš°ìŠ¤ ê°ë„ ì¡°ì ˆ
     float sensitivity = 0.1f; // change this value to your liking
     xoffset *= sensitivity;
     yoffset *= sensitivity;
@@ -296,15 +296,15 @@ void mouse_callback(GLFWwindow* window, double xposIn, double yposIn)
     yaw += xoffset;
     pitch += yoffset;
 
-    // ÀÌ»óÇÑ ¿òÁ÷ÀÓ Á¦ÇÑ
+    // ì´ìƒí•œ ì›€ì§ì„ ì œí•œ
     if (pitch > 89.0f)
         pitch = 89.0f;
     if (pitch < -89.0f)
         pitch = -89.0f;
 
-    // ¿ì¸®°¡ µÑ·¯º¸´Â Á¤µµ °è»ê, yaw,pitch °ªÀ» 3Â÷¿ø ¹æÇâº¤ÅÍ·Î º¯È¯
-    //yaw : ¼öÆò
-    // pitch : ¼öÁ÷
+    // ìš°ë¦¬ê°€ ë‘˜ëŸ¬ë³´ëŠ” ì •ë„ ê³„ì‚°, yaw,pitch ê°’ì„ 3ì°¨ì› ë°©í–¥ë²¡í„°ë¡œ ë³€í™˜
+    //yaw : ìˆ˜í‰
+    // pitch : ìˆ˜ì§
     glm::vec3 front;
     front.x = cos(glm::radians(yaw)) * cos(glm::radians(pitch));
     front.y = sin(glm::radians(pitch));
@@ -315,7 +315,7 @@ void mouse_callback(GLFWwindow* window, double xposIn, double yposIn)
 // zoom
 void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 {
-    //scroll ÇÒ ¶§ yoffset = ¿ì¸®°¡ ¼öÁ÷À¸·Î ½ºÅ©·ÑÇÑ Á¤µµ
+    //scroll í•  ë•Œ yoffset = ìš°ë¦¬ê°€ ìˆ˜ì§ìœ¼ë¡œ ìŠ¤í¬ë¡¤í•œ ì •ë„
     fov -= (float)yoffset;
     if (fov < 1.0f)
         fov = 1.0f;
