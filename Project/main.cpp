@@ -1,4 +1,3 @@
-//오류수정
 
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
@@ -312,6 +311,9 @@ void processInput(GLFWwindow* window)
         camera.ProcessKeyboard(LEFT, deltaTime);
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
         camera.ProcessKeyboard(RIGHT, deltaTime);
+
+    if (glfwGetKey(window, GLFW_KEY_X) == GLFW_PRESS)
+        system("C:\\Users\\User\\OneDrive\\Desktop\\GUI\\aircon\\aircon\\aircon\\bin\\Debug\\netcoreapp3.1/aircon.exe");
 
 }
 
