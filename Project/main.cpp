@@ -312,8 +312,11 @@ void processInput(GLFWwindow* window)
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
         camera.ProcessKeyboard(RIGHT, deltaTime);
 
+    if (glfwGetKey(window, GLFW_KEY_Z) == GLFW_PRESS)
+        system("C:\\Users\\User\\OneDrive\\Desktop\\GUI\\aircon\\aircon\\aircon\\bin\\Debug\\netcoreapp3.1\\aircon.exe");
+
     if (glfwGetKey(window, GLFW_KEY_X) == GLFW_PRESS)
-        system("C:\\Users\\User\\OneDrive\\Desktop\\GUI\\aircon\\aircon\\aircon\\bin\\Debug\\netcoreapp3.1/aircon.exe");
+        system("C:\\Users\\User\\OneDrive\\Desktop\\GUI\\co2sensor\\co2sensor\\co2sensor\\bin\\Debug\\netcoreapp3.1\\co2sensor.exe");
 
 }
 
